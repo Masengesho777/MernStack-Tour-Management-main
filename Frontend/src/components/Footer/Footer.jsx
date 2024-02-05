@@ -139,7 +139,7 @@ const Footer = () => {
 
           <Col lg="12" className='text-center pt-5'>
             <p className="copyright">
-              Copyright {year}, design and develop by Mukesharugamba Felicien.
+              Copyright {year}, design and develop by Masengesho cadeau.
               All right reserved.
             </p>
           </Col>
