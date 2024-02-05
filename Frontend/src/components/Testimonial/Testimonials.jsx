@@ -1,8 +1,8 @@
-import React from 'react'
-import Slider from 'react-slick'
-import ava01 from '../../assets/images/ava-1.jpg'
-import ava02 from '../../assets/images/ava-2.jpg'
-import ava03 from '../../assets/images/ava-3.jpg'
+import React from "react";
+import Slider from "react-slick";
+import ava01 from "../../assets/images/ava-1.jpg";
+import ava02 from "../../assets/images/ava-2.jpg";
+import ava03 from "../../assets/images/ava-3.jpg";
 
 const Testimonials = () => {
   const settings = {
@@ -14,7 +14,7 @@ const Testimonials = () => {
     autoplaySpeed: 2000,
     slidesToShow: 3,
 
-    responsive:[
+    responsive: [
       {
         breakpoint: 992,
         settings: {
@@ -28,7 +28,7 @@ const Testimonials = () => {
         breakpoint: 576,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
         },
       },
     ],
@@ -81,7 +81,7 @@ const Testimonials = () => {
         <div className="d-flex align-items-center gap-4 mt-3">
           <img src={ava03} className="w-25 h-25 rounded-2" alt="" />
           <div>
-            <h6 className="mb-0 mt-3">Cadeau masengesho</h6>
+            <h6 className="mb-0 mt-3">John Doe</h6>
             <p>Customer</p>
           </div>
         </div>
@@ -138,7 +138,7 @@ const Testimonials = () => {
         </div>
       </div>
     </Slider>
-  )
-}
+  );
+};
 
-export default Testimonials
+export default Testimonials;

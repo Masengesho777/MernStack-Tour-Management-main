@@ -1,17 +1,16 @@
-const calculateAvgRating = reviews=>{
+const calculateAvgRating = (reviews) => {
+  const totalRating = reviews?.reduce((acc, item) => acc + item.rating, 0);
+  const avgRating =
+    totalRating === 0
+      ? ""
+      : totalRating === 1
+      ? totalRating
+      : (totalRating / reviews?.length).toFixed(1);
 
-    const totatRating = reviews?.reduce((acc, item) => acc + item.rating, 0)
-    const avgRating =
-      totatRating === 0
-        ? ''
-        : totatRating === 1
-        ? totatRating
-        : (totatRating / reviews?.length).toFixed(1);
+  return {
+    totalRating,
+    avgRating,
+  };
+};
 
-        return {
-            totatRating,
-            avgRating
-        }
-}
-
-export default calculateAvgRating
+export default calculateAvgRating;
