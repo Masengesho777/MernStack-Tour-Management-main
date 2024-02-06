@@ -1,16 +1,12 @@
-const express = require("express");
-const {
-  createBooking,
-  getAllBooking,
-  getBooking,
-} = require("../controllers/bookingController.js");
+import express from 'express'
+import { createBooking, getAllBooking, getBooking } from '../controllers/bookingController.js'
 
-const { verifyAdmin, verifyUser } = require("../utils/verifyToken.js");
+import { verifyAdmin, verifyUser } from '../utils/verifyToken.js'
 
-const router = express.Router();
+const router = express.Router()
 
-router.post("/", verifyUser, createBooking);
-router.get("/:id", verifyUser, getBooking);
-router.get("/", verifyAdmin, getAllBooking);
+router.post('/', verifyUser, createBooking)
+router.get('/:id', verifyUser, getBooking)
+router.get('/', verifyAdmin, getAllBooking)
 
-module.exports = router;
+export default router

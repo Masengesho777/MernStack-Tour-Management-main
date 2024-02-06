@@ -1,12 +1,12 @@
-const jwt = require("jsonwebtoken");
+import jwt from 'jsonwebtoken'
 
-const verifyToken = (req, res, next) => {
-  const token = req.cookies.accessToken;
+export const verifyToken = (req, res, next) => {
+  const token = req.cookies.accessToken
 
   if (!token) {
     return res
       .status(401)
-      .json({ success: false, message: "You're not authorized" });
+      .json({ success: false, message: "You're not authorize" })
   }
 
   // if token is exist then verify the token
@@ -14,36 +14,34 @@ const verifyToken = (req, res, next) => {
     if (err) {
       return res
         .status(401)
-        .json({ success: false, message: "token is invalid" });
+        .json({ success: false, message: 'token is invalid' })
     }
 
-    req.user = user;
-    next(); // don't forget to call next
-  });
-};
+    req.user = user
+    next() // don't forget to call next
+  })
+}
 
-const verifyUser = (req, res, next) => {
+export const verifyUser = (req, res, next) => {
   verifyToken(req, res, next, () => {
-    if (req.user.id === req.params.id || req.user.role === "admin") {
-      next();
+    if (req.user.id === req.params.id || req.user.role === 'admin') {
+      next()
     } else {
       return res
         .status(401)
-        .json({ success: false, message: "You're not authenticated" });
+        .json({ success: false, message: "You're not authenticated" })
     }
-  });
-};
+  })
+}
 
-const verifyAdmin = (req, res, next) => {
+export const verifyAdmin = (req, res, next) => {
   verifyToken(req, res, next, () => {
-    if (req.user.role === "admin") {
-      next();
+    if (req.user.role === 'admin') {
+      next()
     } else {
       return res
         .status(401)
-        .json({ success: false, message: "You're not authorized" });
+        .json({ success: false, message: "You're not authorize" })
     }
-  });
-};
-
-module.exports = { verifyAdmin, verifyUser, verifyToken };
+  })
+}

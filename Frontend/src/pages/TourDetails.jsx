@@ -1,24 +1,24 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
-import "../styles/tour-details.css";
-import { Container, Row, Col, Form, ListGroup } from "reactstrap";
-import { useParams } from "react-router-dom";
-import calculateAvgRating from "./../utils/avgRating";
-import avatar from "../assets/images/avatar.jpg";
-import Booking from "../components/Booking/Booking";
-import Newsletter from "./../shared/Newsletter";
-import useFetch from "./../hooks/useFetch";
-import { BASE_URL } from "./../utils/config";
+import React, { useEffect, useRef, useState, useContext } from 'react'
+import '../styles/tour-details.css'
+import { Container, Row, Col, Form, ListGroup } from 'reactstrap'
+import { useParams } from 'react-router-dom'
+import calculateAvgRating from './../utils/avgRating'
+import avatar from '../assets/images/avatar.jpg'
+import Booking from '../components/Boobing/Booking'
+import Newsletter from './../shared/Newsletter'
+import useFetch from './../hooks/useFetch'
+import { BASE_URL } from './../utils/config'
 
-import { AuthContext } from "./../context/AuthContext";
+import {AuthContext} from './../context/AuthContext'
 
 const TourDetails = () => {
-  const { id } = useParams();
-  const reviewMsgRef = useRef("");
-  const [tourRating, setTourRating] = useState(null);
-  const { user } = useContext(AuthContext);
+  const { id } = useParams()
+  const reviewMsgRef = useRef('')
+  const [tourRating, setTourRating] = useState(null)
+  const {user} = useContext(AuthContext)
 
   // fetch data from database
-  const { data: tour, loading, error } = useFetch(`${BASE_URL}/tours/${id}`);
+  const { data: tour, loading, error } = useFetch(`${BASE_URL}/tours/${id}`)
 
   // distracture properties from tour object
   const {
@@ -31,52 +31,55 @@ const TourDetails = () => {
     city,
     distance,
     maxGroupSize,
-  } = tour;
+  } = tour
 
-  const { totalRating, avgRating } = calculateAvgRating(reviews);
+  const { totalRating, avgRating } = calculateAvgRating(reviews)
 
   // format date
-  const options = { day: "numeric", month: "long", year: "numeric" };
+  const options = { day: 'numeric', month: 'long', year: 'numeric' }
 
   // submit request to the server
   const submitHandler = async (e) => {
-    e.preventDefault();
-    const reviewText = reviewMsgRef.current.value;
+    e.preventDefault()
+    const reviewText = reviewMsgRef.current.value
+
 
     try {
+
       if (!user || user === undefined || user === null) {
-        alert("please sign in");
+        alert('please sign in')
       }
 
       const reviewObj = {
-        username: user?.username,
+        username:user?.username,
         reviewText,
-        rating: tourRating,
+        rating:tourRating,
       };
 
-      const res = await fetch(`${BASE_URL}/review/${id}`, {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
+      const res = await fetch(`${BASE_URL}/review/${id}`,{
+        method:'post',
+        headers:{
+          'content-type':'application/json'
         },
-        credentials: "include",
-        body: JSON.stringify(reviewObj),
-      });
+        credentials:'include',
+        body:JSON.stringify(reviewObj)
+      })
 
       const result = await res.json();
-      if (!res.ok) {
-        return alert(result.message);
+      if(!res.ok) {
+        return alert(result.message)
       }
 
-      alert(result.message);
+      alert(result.message)
+
     } catch (err) {
       alert(err.message);
     }
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [tour]);
+    window.scrollTo(0, 0)
+  }, [tour])
 
   return (
     <>
@@ -97,11 +100,11 @@ const TourDetails = () => {
                       <span className="tour__rating d-flex align-items-center gap-1">
                         <i
                           class="ri-star-s-fill"
-                          style={{ color: "var(--secondary-color)" }}
+                          style={{ color: 'var(--secondary-color)' }}
                         ></i>
                         {avgRating === 0 ? null : avgRating}
                         {totalRating === 0 ? (
-                          "Not rated"
+                          'Not rated'
                         ) : (
                           <span>({reviews?.length})</span>
                         )}
@@ -180,9 +183,10 @@ const TourDetails = () => {
                               <div>
                                 <h5>{review.username}</h5>
                                 <p>
-                                  {new Date(
-                                    review.createdAt
-                                  ).toLocaleDateString("en-US", options)}
+                                  {new Date(review.createdAt).toLocaleDateString(
+                                    'en-US',
+                                    options
+                                  )}
                                 </p>
                               </div>
                               <span className="d-flex align-items-center">
@@ -207,8 +211,8 @@ const TourDetails = () => {
                               <div>
                                 <h5>Felicien</h5>
                                 <p>
-                                  {new Date("01-18-2023").toLocaleDateString(
-                                    "en-US",
+                                  {new Date('01-18-2023').toLocaleDateString(
+                                    'en-US',
                                     options
                                   )}
                                 </p>
@@ -237,7 +241,7 @@ const TourDetails = () => {
       </section>
       <Newsletter />
     </>
-  );
-};
+  )
+}
 
-export default TourDetails;
+export default TourDetails

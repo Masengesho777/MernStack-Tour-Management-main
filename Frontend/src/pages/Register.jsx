@@ -1,51 +1,51 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react'
 
-import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
-import { Link, useNavigate } from "react-router-dom";
-import "../styles/login.css";
+import { Container, Row, Col, Form, FormGroup, Button } from 'reactstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import '../styles/login.css'
 
-import registerImg from "../assets/images/register.png";
-import userIcon from "../assets/images/user.png";
+import registerImg from '../assets/images/register.png'
+import userIcon from '../assets/images/user.png'
 
-import { AuthContext } from "./../context/AuthContext";
-import { BASE_URL } from "./../utils/config";
+import { AuthContext } from './../context/AuthContext';
+import { BASE_URL } from './../utils/config';
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
     userName: undefined,
     email: undefined,
     password: undefined,
-  });
+  })
 
-  const { dispatch } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const {dispatch} = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }))
+  }
 
   const handleclick = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      const res = await fetch(`${BASE_URL}/auth/register`, {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
+      const res = await fetch(`${BASE_URL}/auth/register`,{
+        method:'post',
+        headers:{
+          'content-type':'application/json'
         },
         body: JSON.stringify(credentials),
-      });
+      })
 
-      const result = await res.json();
+      const result = await res.json()
 
-      if (!res.ok) alert(result.message);
+      if(!res.ok) alert(result.message);
 
-      dispatch({ type: "REGISTER_SUCCESS" });
-      navigate("/login");
+      dispatch({type:'REGISTER_SUCCESS'})
+      navigate('/login')
     } catch (err) {
-      alert(err.message);
+      alert(err.message)
     }
-  };
+  }
   return (
     <section>
       <Container>
@@ -98,7 +98,7 @@ const Register = () => {
                   </Button>
                 </Form>
                 <p>
-                  Already have an account? <Link to="/login">Login</Link>{" "}
+                  Already have an account? <Link to="/login">Login</Link>{' '}
                 </p>
               </div>
             </div>
@@ -106,7 +106,7 @@ const Register = () => {
         </Row>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

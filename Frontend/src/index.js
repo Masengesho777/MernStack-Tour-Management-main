@@ -18,4 +18,4 @@ root.render(
       </BrowserRouter>
     </AuthContextProvider>
   </React.StrictMode>
-);
+)

@@ -1,43 +1,43 @@
-import React from "react";
-import "./footer.css";
+import React from 'react'
+import './footer.css'
 
-import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
+import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap'
 
-import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import { Link } from 'react-router-dom'
+import logo from '../../assets/images/logo.png'
 
 const quick__links = [
   {
-    path: "/gallery",
-    display: "Gallery",
+    path: '/gallery',
+    display: 'Gallery',
   },
   {
-    path: "/login",
-    display: "Login",
+    path: '/login',
+    display: 'Login',
   },
   {
-    path: "/register",
-    display: "Register",
+    path: '/register',
+    display: 'Register',
   },
-];
+]
 
 const quick__links2 = [
   {
-    path: "/gallery",
-    display: "Gallery",
+    path: '/gallery',
+    display: 'Gallery',
   },
   {
-    path: "/login",
-    display: "Login",
+    path: '/login',
+    display: 'Login',
   },
   {
-    path: "/register",
-    display: "Register",
+    path: '/register',
+    display: 'Register',
   },
-];
+]
 
 const Footer = () => {
-  const year = new Date().getFullYear();
+  const year = new Date().getFullYear()
 
   return (
     <footer className="footer">
@@ -137,16 +137,16 @@ const Footer = () => {
             </ListGroup>
           </Col>
 
-          <Col lg="12" className="text-center pt-5">
+          <Col lg="12" className='text-center pt-5'>
             <p className="copyright">
-              Copyright {year}, designed and developed by Christophe Ir. All
-              right reserved.
+              Copyright {year}, design and develop by Mukesharugamba Felicien.
+              All right reserved.
             </p>
           </Col>
         </Row>
       </Container>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
