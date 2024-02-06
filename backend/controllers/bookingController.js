@@ -1,57 +1,59 @@
-import Booking from '../models/Booking.js'
+const Booking = require("../models/Bookings.js");
 
 // create new booking
-export const createBooking = async (req, res) => {
-  const newBooking = new Booking(req.body)
+const createBooking = async (req, res) => {
+  const newBooking = new Booking(req.body);
   try {
-    const savedBooking = await newBooking.save()
+    const savedBooking = await newBooking.save();
     res.status(200).json({
       success: true,
-      message: 'Your tour is booked',
+      message: "Your tour is booked",
       data: savedBooking,
-    })
+    });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: 'internal server error',
-    })
+      message: "internal server error",
+    });
   }
-}
+};
 
 // get single booking
-export const getBooking = async (req, res) => {
-  const id = req.params.id
+const getBooking = async (req, res) => {
+  const id = req.params.id;
 
   try {
-    const book = await Booking.findById(id)
+    const book = await Booking.findById(id);
 
     res.status(200).json({
       success: true,
-      massage: 'successful',
+      massage: "successful",
       data: book,
-    })
+    });
   } catch (err) {
     res.status(404).json({
       success: false,
-      massage: 'not found',
-    })
+      massage: "not found",
+    });
   }
-}
+};
 
 // get all booking
-export const getAllBooking = async (req, res) => {
+const getAllBooking = async (req, res) => {
   try {
-    const books = await Booking.find()
+    const books = await Booking.find();
 
     res.status(200).json({
       success: true,
-      massage: 'successful',
+      massage: "successful",
       data: books,
-    })
+    });
   } catch (err) {
     res.status(500).json({
       success: false,
-      massage: 'internal server error',
-    })
+      massage: "internal server error",
+    });
   }
-}
+};
+
+module.exports = { createBooking, getBooking, getAllBooking };

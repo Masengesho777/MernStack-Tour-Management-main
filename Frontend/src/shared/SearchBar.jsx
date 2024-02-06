@@ -1,38 +1,38 @@
-import React, { useRef } from 'react'
-import './search-bar.css'
-import { Col, Form, FormGroup } from 'reactstrap'
+import React, { useRef } from "react";
+import "./search-bar.css";
+import { Col, Form, FormGroup } from "reactstrap";
 
-import { BASE_URL } from './../utils/config'
+import { BASE_URL } from "./../utils/config";
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const locationRef = useRef('')
-  const distanceRef = useRef(0)
-  const maxGroupeSizeRef = useRef(0)
-  const navigate = useNavigate()
+  const locationRef = useRef("");
+  const distanceRef = useRef(0);
+  const maxGroupeSizeRef = useRef(0);
+  const navigate = useNavigate();
 
   const searchHandle = async () => {
-    const location = locationRef.current.value
-    const distance = distanceRef.current.value
-    const maxGroupeSize = maxGroupeSizeRef.current.value
+    const location = locationRef.current.value;
+    const distance = distanceRef.current.value;
+    const maxGroupeSize = maxGroupeSizeRef.current.value;
 
-    if (location === '' || distance === '' || maxGroupeSize === '') {
-      return alert('All fields are required!')
+    if (location === "" || distance === "" || maxGroupeSize === "") {
+      return alert("All fields are required!");
     }
 
     const res = await fetch(
       `${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupeSize}`
-    )
-    if (!res.ok) alert('Something went wrong')
+    );
+    if (!res.ok) alert("Something went wrong");
 
-    const result = await res.json()
+    const result = await res.json();
 
     navigate(
       `tours/search?city=${location}&distance=${distance}&maxGroupSize=${maxGroupeSize}`,
       { state: result.data }
-    )
-  }
+    );
+  };
 
   return (
     <Col lg="12">
@@ -80,7 +80,7 @@ const SearchBar = () => {
         </Form>
       </div>
     </Col>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;

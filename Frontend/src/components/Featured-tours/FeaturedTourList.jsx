@@ -1,17 +1,17 @@
-import React from 'react'
-import TourCard from '../../shared/TourCard'
+import React from "react";
+import TourCard from "../../shared/TourCard";
 
-import { Col } from 'reactstrap'
+import { Col } from "reactstrap";
 
-import useFetch from './../../hooks/useFetch'
-import { BASE_URL } from './../../utils/config'
+import useFetch from "./../../hooks/useFetch";
+import { BASE_URL } from "./../../utils/config";
 
 const FeaturedTourList = () => {
   const {
     data: featuredTours,
     loading,
     error,
-  } = useFetch(`${BASE_URL}/tours/search/getFeaturedTours`)
+  } = useFetch(`${BASE_URL}/tours/search/getFeaturedTours`);
 
   return (
     <>
@@ -26,7 +26,7 @@ const FeaturedTourList = () => {
           </Col>
         ))}
     </>
-  )
-}
+  );
+};
 
-export default FeaturedTourList
+export default FeaturedTourList;

@@ -1,59 +1,57 @@
+import React, { useRef, useEffect, useContext } from "react";
+import { Container, Row, Button } from "reactstrap";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
-import React, {useRef, useEffect,useContext} from 'react'
-import { Container, Row, Button } from 'reactstrap'
-import { NavLink, Link, useNavigate } from 'react-router-dom'
-
-import logo from '../../assets/images/logo.png'
-import './header.css'
-import { AuthContext } from './../../context/AuthContext';
+import logo from "../../assets/images/logo.png";
+import "./header.css";
+import { AuthContext } from "./../../context/AuthContext";
 
 const nav__links = [
   {
-    path: '/home',
-    display: 'Home',
+    path: "/home",
+    display: "Home",
   },
   {
-    path: '/about',
-    display: 'About',
+    path: "/about",
+    display: "About",
   },
   {
-    path: '/tours',
-    display: 'Tours',
+    path: "/tours",
+    display: "Tours",
   },
 ];
 
 const Header = () => {
   const headerRef = useRef(null);
-  const menuRef = useRef(null)
-  const navigate = useNavigate()
-  const {user,dispatch} = useContext(AuthContext)
+  const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const { user, dispatch } = useContext(AuthContext);
 
-  const logout = ()=>{
-    dispatch({type:'LOGOUT'})
-    navigate('/')
-  }
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+  };
 
-  const stickyHeaderFunc = ()=>{
-    window.addEventListener('scroll',()=>{
-      if(
+  const stickyHeaderFunc = () => {
+    window.addEventListener("scroll", () => {
+      if (
         document.body.scrollTop > 80 ||
         document.documentElement.scrollTop > 80
       ) {
-        headerRef.current.classList.add('sticky__header');
+        headerRef.current.classList.add("sticky__header");
       } else {
-        headerRef.current.classList.remove('stickt__header');
+        headerRef.current.classList.remove("stickt__header");
       }
-    })
-  }
+    });
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     stickyHeaderFunc();
 
-    return window.removeEventListener('scroll', stickyHeaderFunc);
+    return window.removeEventListener("scroll", stickyHeaderFunc);
   });
 
-
-  const toggleMenu = ()=> menuRef.current.classList.toggle('show__menu')
+  const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
 
   return (
     <header className="header" ref={headerRef}>
@@ -65,7 +63,11 @@ const Header = () => {
           >
             {/*------ logo -------*/}
             <div className="logo">
-              <img src={logo} alt="" />
+              <img
+                src={logo}
+                alt=""
+                style={{ height: "60px", width: "60px" }}
+              />
             </div>
 
             {/*------ logo end-------*/}
@@ -78,7 +80,7 @@ const Header = () => {
                     <NavLink
                       to={item.path}
                       className={(navClass) =>
-                        navClass.isActive ? 'active__link' : ''
+                        navClass.isActive ? "active__link" : ""
                       }
                     >
                       {item.display}
@@ -119,7 +121,7 @@ const Header = () => {
         </Row>
       </Container>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
